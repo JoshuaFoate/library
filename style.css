@@ -1,0 +1,37 @@
+.grid-container {
+    display: grid;
+}
+
+.book {
+    display: grid;
+    border: solid black;
+    margin: 15px;
+    padding: 15px;
+}
+
+button {
+    margin: 15px;
+    border-radius: 10px;
+}
+
+.book-form {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.book-form p {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+}
+
+label, input {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.remove-book, .read-button {
+    max-width: 100px;
+}
