@@ -6,12 +6,10 @@ function Book(title, author, pages, read) {
     this.pages = pages;
     this.read = read;
     this.info = function() {
-        if (this.read === true) {
-            // message = title + " by " + author + ", " + pages + " pages, already read."
+        if (this.read === "yes") {
             message = "Already read";
         }
         else {
-            // message = title + " by " + author + ", " + pages + " pages, not read yet."
             message = "Not read yet";
         }
         return message;
@@ -32,6 +30,32 @@ function showBooks() {
         book.innerHTML += `<button class="read-button">READ</button>`;
         gridContainer.appendChild(book);
     }
+
+    const removeBookButton = document.querySelectorAll('.remove-book');
+    removeBookButton.forEach(btn => {
+        btn.onclick = function() {
+            btn.parentElement.remove();
+        }
+    });
+
+    const readButton = document.querySelectorAll('.read-button');
+    readButton.forEach(btn => {
+        btn.onclick = function() {
+            let title = btn.parentElement.getAttribute('id');
+            for (let i = 0; i < myLibrary.length; i++) {
+                if (myLibrary[i].title === title) {
+                    if (myLibrary[i].read === "yes") {
+                        myLibrary[i].read = "no";
+                    }
+                    else {
+                        myLibrary[i].read = "yes";
+                    }
+                    let bookReadSpan = btn.parentElement.querySelector('.book-read');
+                    bookReadSpan.textContent = `Read: ${myLibrary[i].info()}`;
+                }
+            }
+        }
+    });
 }
 
 const newBookButton = document.querySelector('.new-book');
@@ -50,30 +74,4 @@ addBookButton.addEventListener('click', function(event) {
     myLibrary.push(newBook);
     showBooks();
     document.getElementById('book-form').style.display = 'none';
-});
-
-const removeBookButton = document.querySelectorAll('.remove-book');
-removeBookButton.forEach(btn => {
-    btn.onclick = function() {
-        btn.parentElement.remove();
-    }
-});
-
-const readButton = document.querySelectorAll('.read-button');
-readButton.forEach(btn => {
-    btn.onclick = function() {
-        let title = btn.parentElement.getAttribute('id');
-        for (let i = 0; i < myLibrary.length; i++) {
-            if (myLibrary[i].title === title) {
-                if (myLibrary[i].read === true) {
-                    myLibrary[i].read = false;
-                }
-                else {
-                    myLibrary[i].read = true;
-                }
-                let bookReadSpan = btn.parentElement.querySelector('.book-read');
-                bookReadSpan.textContent = `Read: ${myLibrary[i].info()}`;
-            }
-        }
-    }
 });
